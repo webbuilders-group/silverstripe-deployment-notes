@@ -62,6 +62,9 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
             if(!empty($prevDeploy) && $prevDeploy!==false && $prevDeploy->exists()) {
                 $startDate=date('Y-m-d', strtotime($prevDeploy->DeploymentWeekEnd.' -4 days'));
                 $endDate=date('Y-m-d', strtotime($startDate.' +'.DeploymentSchedule::config()->deployment_cycle_length.' weeks friday'));
+            }else {
+                $startDate=date('Y-m-d', strtotime('monday this week'));
+                $endDate=date('Y-m-d', strtotime($startDate.' +'.DeploymentSchedule::config()->deployment_cycle_length.' weeks friday'));
             }
         }
         
