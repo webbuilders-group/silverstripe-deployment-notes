@@ -1,0 +1,763 @@
+html, body {
+    font-family: Raleway, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.deployment-schedule:not([data-use-github-style] ) {
+    padding: 2em;
+    font-size: 1.2em;
+    color: rgb(171, 178, 191);
+    overflow: auto;
+    background-color: rgb(40, 44, 52);
+}
+
+.deployment-schedule >:first-child {
+    margin-top: 0px;
+}
+
+.deployment-schedule h1, .deployment-schedule h2,
+.deployment-schedule h3, .deployment-schedule h4,
+.deployment-schedule h5, .deployment-schedule h6 {
+    line-height: 1.2;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: rgb(255, 255, 255);
+}
+
+.deployment-schedule h1 {
+    font-size: 2.4em;
+    font-weight: 300;
+}
+
+.deployment-schedule h2 {
+    font-size: 1.8em;
+    font-weight: 400;
+}
+
+.deployment-schedule h3 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.deployment-schedule h4 {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.deployment-schedule h5 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.deployment-schedule h6 {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.deployment-schedule strong {
+    color: rgb(255, 255, 255);
+}
+
+.deployment-schedule del {
+    color: rgb(124, 135, 156);
+}
+
+.deployment-schedule a,.deployment-schedule a code {
+    color: rgb(82, 139, 255);
+}
+
+.deployment-schedule img {
+    max-width: 100%;
+}
+
+.deployment-schedule >p {
+    margin-top: 0px;
+    margin-bottom: 1.5em;
+}
+
+.deployment-schedule >ul, .deployment-schedule>ol {
+    margin-bottom: 1.5em;
+}
+
+.deployment-schedule blockquote {
+    margin: 1.5em 0px;
+    font-size: inherit;
+    color: rgb(124, 135, 156);
+    border-color: rgb(75, 83, 98);
+    border-width: 4px;
+}
+
+.deployment-schedule hr {
+    margin: 3em 0px;
+    border: 0;
+    border-top: 2px dashed rgb(75, 83, 98);
+    background: none;
+}
+
+.deployment-schedule hr.deploy-heading-split {
+    margin-top: 0;
+}
+
+.deployment-schedule table {
+    margin: 1.5em 0px;
+}
+
+.deployment-schedule th {
+    color: rgb(255, 255, 255);
+}
+
+.deployment-schedule th,.deployment-schedule td {
+    padding: 0.66em 1em;
+    border: 1px solid rgb(75, 83, 98);
+}
+
+.deployment-schedule code {
+    background-color: rgb(58, 63, 75);
+    
+    color: rgb(255, 255, 255);
+    
+    padding: 0 4px;
+}
+
+.deployment-schedule pre.editor-colors {
+    margin: 1.5em 0px;
+    padding: 1em;
+    font-size: 0.92em;
+    border-radius: 3px;
+    background-color: rgb(49, 54, 63);
+}
+
+.scrollbars-visible-always .deployment-schedule pre.editor-colors::shadow .vertical-scrollbar,.scrollbars-visible-always .deployment-schedule pre.editor-colors::shadow .horizontal-scrollbar {
+    visibility: hidden;
+}
+
+.scrollbars-visible-always .deployment-schedule pre.editor-colors:hover::shadow .vertical-scrollbar,.scrollbars-visible-always .deployment-schedule pre.editor-colors:hover::shadow .horizontal-scrollbar {
+    visibility: visible;
+}
+
+.bracket-matcher .region {
+    border-bottom: 1px dotted lime;
+    position: absolute;
+}
+
+.spell-check-misspelling .region {
+    border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+
+.comment {
+    color: #5c6370;
+    font-style: italic;
+}
+
+.comment .markup.link {
+    color: #5c6370;
+}
+
+.entity.name.type {
+    color: #e5c07b;
+}
+
+.entity.other.inherited-class {
+    color: #98c379;
+}
+
+.keyword {
+    color: #c678dd;
+}
+
+.keyword.control {
+    color: #c678dd;
+}
+
+.keyword.operator {
+    color: #abb2bf;
+}
+
+.keyword.other.special-method {
+    color: #61afef;
+}
+
+.keyword.other.unit {
+    color: #d19a66;
+}
+
+.storage {
+    color: #c678dd;
+}
+
+.storage.type.annotation,.storage.type.primitive {
+    color: #c678dd;
+}
+
+.storage.modifier.package,.storage.modifier.import {
+    color: #abb2bf;
+}
+
+.constant {
+    color: #d19a66;
+}
+
+.constant.variable {
+    color: #d19a66;
+}
+
+.constant.character.escape {
+    color: #56b6c2;
+}
+
+.constant.numeric {
+    color: #d19a66;
+}
+
+.constant.other.color {
+    color: #56b6c2;
+}
+
+.constant.other.symbol {
+    color: #56b6c2;
+}
+
+.variable {
+    color: #e06c75;
+}
+
+.variable.interpolation {
+    color: #be5046;
+}
+
+.variable.parameter {
+    color: #abb2bf;
+}
+
+.string {
+    color: #98c379;
+}
+
+.string.regexp {
+    color: #56b6c2;
+}
+
+.string.regexp .source.ruby.embedded {
+    color: #e5c07b;
+}
+
+.string.other.link {
+    color: #e06c75;
+}
+
+.punctuation.definition.comment {
+    color: #5c6370;
+}
+
+.punctuation.definition.method-parameters,.punctuation.definition.function-parameters,.punctuation.definition.parameters,.punctuation.definition.separator,.punctuation.definition.seperator,.punctuation.definition.array
+    {
+    color: #abb2bf;
+}
+
+.punctuation.definition.heading,.punctuation.definition.identity {
+    color: #61afef;
+}
+
+.punctuation.definition.bold {
+    color: #e5c07b;
+    font-weight: bold;
+}
+
+.punctuation.definition.italic {
+    color: #c678dd;
+    font-style: italic;
+}
+
+.punctuation.section.embedded {
+    color: #be5046;
+}
+
+.punctuation.section.method,.punctuation.section.class,.punctuation.section.inner-class {
+    color: #abb2bf;
+}
+
+.support.class {
+    color: #e5c07b;
+}
+
+.support.type {
+    color: #56b6c2;
+}
+
+.support.function {
+    color: #56b6c2;
+}
+
+.support.function.any-method {
+    color: #61afef;
+}
+
+.entity.name.function {
+    color: #61afef;
+}
+
+.entity.name.class,.entity.name.type.class {
+    color: #e5c07b;
+}
+
+.entity.name.section {
+    color: #61afef;
+}
+
+.entity.name.tag {
+    color: #e06c75;
+}
+
+.entity.other.attribute-name {
+    color: #d19a66;
+}
+
+.entity.other.attribute-name.id {
+    color: #61afef;
+}
+
+.meta.class {
+    color: #e5c07b;
+}
+
+.meta.class.body {
+    color: #abb2bf;
+}
+
+.meta.method-call,.meta.method {
+    color: #abb2bf;
+}
+
+.meta.definition.variable {
+    color: #e06c75;
+}
+
+.meta.link {
+    color: #d19a66;
+}
+
+.meta.require {
+    color: #61afef;
+}
+
+.meta.selector {
+    color: #c678dd;
+}
+
+.meta.separator {
+    background-color: #373b41;
+    color: #abb2bf;
+}
+
+.meta.tag {
+    color: #abb2bf;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.none {
+    color: #abb2bf;
+}
+
+.invalid.deprecated {
+    color: #523d14 !important;
+    background-color: #e0c285 !important;
+}
+
+.invalid.illegal {
+    color: #ffffff !important;
+    background-color: #e05252 !important;
+}
+
+.markup.bold {
+    color: #d19a66;
+    font-weight: bold;
+}
+
+.markup.changed {
+    color: #c678dd;
+}
+
+.markup.deleted {
+    color: #e06c75;
+}
+
+.markup.italic {
+    color: #c678dd;
+    font-style: italic;
+}
+
+.markup.heading {
+    color: #e06c75;
+}
+
+.markup.heading .punctuation.definition.heading {
+    color: #61afef;
+}
+
+.markup.link {
+    color: #c678dd;
+}
+
+.markup.inserted {
+    color: #98c379;
+}
+
+.markup.quote {
+    color: #d19a66;
+}
+
+.markup.raw {
+    color: #98c379;
+}
+
+/*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
+.prettyprint {
+    background-color: rgb(49, 54, 63);
+    
+    font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+    border: 0 !important;
+    
+    font-size: 0.92em;
+    
+    margin: 1.5em 0;
+    padding: 1em;
+    
+    border-radius: 3px;
+}
+
+.prettyprint code {
+    background: transparent;
+    
+    padding: 0;
+}
+
+.prettyprint .pln {
+    color: #e6e9ed;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+.prettyprint ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #656d78;
+}
+
+.prettyprint li.L0,
+.prettyprint li.L1,
+.prettyprint li.L2,
+.prettyprint li.L3,
+.prettyprint li.L4,
+.prettyprint li.L5,
+.prettyprint li.L6,
+.prettyprint li.L7,
+.prettyprint li.L8,
+.prettyprint li.L9 {
+    padding-left: 1em;
+    background-color: #2f3640;
+    list-style-type: decimal;
+}
+
+@media screen {
+    /* string content */
+    .prettyprint .str {
+        color: #ffce54;
+    }
+
+    /* keyword */
+    .prettyprint .kwd {
+        color: #4fc1e9;
+    }
+
+    /* comment */
+    .prettyprint .com {
+        color: #656d78;
+    }
+
+    /* type name */
+    .prettyprint .typ {
+        color: #4fc1e9;
+    }
+
+    /* literal value */
+    .prettyprint .lit {
+        color: #ac92ec;
+    }
+
+    /* punctuation */
+    .prettyprint .pun {
+        color: #e6e9ed;
+    }
+
+    /* lisp open bracket */
+    .prettyprint .opn {
+        color: #e6e9ed;
+    }
+
+    /* lisp close bracket */
+    .prettyprint .clo {
+        color: #e6e9ed;
+    }
+
+    /* markup tag name */
+    .prettyprint .tag {
+        color: #ed5565;
+    }
+
+    /* markup attribute name */
+    .prettyprint .atn {
+        color: #a0d468;
+    }
+
+    /* markup attribute value */
+    .prettyprint .atv {
+        color: #ffce54;
+    }
+
+    /* declaration */
+    .prettyprint .dec {
+        color: #ac92ec;
+    }
+
+    /* variable name */
+    .prettyprint .var {
+        color: #e6e9ed;
+    }
+
+    /* function name */
+    .prettyprint .fun {
+        color: #e6e9ed;
+    }
+}
+
+
+/**** Top Bar ****/
+
+.deployment-schedule .top-bar {
+    background: #31363F;
+    
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    
+    padding: 10px 2em;
+    
+    text-align: right;
+    
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.deployment-schedule .top-bar a.button {
+    background: #353B45;
+    
+    display: inline-block;
+    
+    font-size: 14px;
+    color: #9DA5B4;
+    
+    padding: 0 14px;
+    
+    border: 1px solid #181A1F;
+    
+    text-align: center;
+    text-decoration: none;
+    
+    border-radius: 3px;
+    
+    line-height: 34px;
+}
+
+.deployment-schedule .top-bar a.button:hover {
+    background: #3E4450;
+    
+    color: #FFFFFF;
+}
+
+.deployment-schedule .top-bar a.button:active {
+    background: #2C313A;
+    
+    color: #FFFFFF;
+    
+    border-color: #8C8C8C;
+}
+
+.deployment-schedule .top-bar a.button + a.button {
+    margin-left: 10px;
+}
+
+
+/**** Deployment Schedule Hub ****/
+.deployment-schedule .current-deployment-progress {
+    margin-bottom: 40px;
+}
+
+.deployment-schedule .current-deployment-progress h2 {
+    margin-top: 0;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap {
+    position: relative;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap ul {
+    position: relative;
+    
+    padding: 0;
+    
+    z-index: 1;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap ul li {
+    float: left;
+    
+    font-weight: bold;
+    
+    width: 33.33%;
+    
+    padding: 10px 0;
+    
+    border: 1px solid rgb(171, 178, 191);
+    
+    text-align: center;
+    
+    list-style-type: none;
+    
+    box-sizing: border-box;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap.out-of-cycle li {
+    font-weight: normal;
+    font-style: italic;
+    
+    width: 100%;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap ul:after {
+    clear: both;
+    
+    display: block;
+    
+    content: ' ';
+    
+    width: 0;
+    height: 0;
+    
+    font-size: 0;
+    
+    line-height: 0;
+    
+    visibility: hidden;
+}
+
+.deployment-schedule .current-deployment-progress .progress-wrap .progress {
+    background: #2B721A;
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    
+    max-width: 100%;
+}
+
+.deployment-schedule .schedule-list, .deployment-schedule .history-list {
+    margin-top: 80px;
+}
+
+.deployment-schedule .schedule-list ul, .deployment-schedule .schedule-list ul li,
+.deployment-schedule .history-list ul, .deployment-schedule .history-list ul li {
+    margin-left: 0;
+    padding-left: 0;
+    
+    list-style-type: none;
+}
+
+.deployment-schedule .schedule-list ul li h4, .deployment-schedule .history-list ul li h4 {
+    margin-top: 0;
+}
+
+.deployment-schedule .schedule-list ul li, .deployment-schedule .history-list ul li {
+    padding: 0 0.75em;
+}
+
+.deployment-schedule .schedule-list ul li + li, .deployment-schedule .history-list ul li + li {
+    margin-top: 0.75em;
+    padding-top: 0.75em;
+    
+    border-top: 1px solid rgb(171, 178, 191);
+}
+
+.deployment-schedule .pagination:before {
+    clear: both;
+    
+    display: block;
+    
+    content: ' ';
+    
+    width: 0;
+    height: 0;
+    
+    font-size: 0;
+    
+    line-height: 0;
+    
+    visibility: hidden;
+}
+
+.deployment-schedule .pagination {
+    text-align: center;
+}
+
+.deployment-schedule .pagination a, .deployment-schedule .pagination strong, .deployment-schedule .pagination span {
+    display: inline-block;
+    
+    font-weight: 600;
+    color: rgb(82, 139, 255);
+    
+    min-width: 10px;
+    
+    margin-bottom: 10px;
+    padding: 0 12px;
+    
+    vertical-align: top;
+    
+    border: 1px solid rgb(82, 139, 255);
+    
+    border-radius: 2px;
+    
+    line-height: 34px;
+    
+    text-align: center;
+    text-decoration: none;
+}
+
+.deployment-schedule .pagination a:hover {
+    border-color: #85ADFF;
+    
+    color: #85ADFF;
+    
+    text-decoration: none;
+}
+
+.deployment-schedule .pagination a + a, .pagination strong + a, .deployment-schedule .pagination span + a, .deployment-schedule .pagination a + span, .deployment-schedule .pagination a + strong {
+    margin-left: 10px;
+}
+
+.deployment-schedule .pagination strong, .deployment-schedule .pagination span {
+    border-color: #999999;
+    
+    color: #999999;
+}
+
+.deployment-schedule .pagination .fa-fw {
+    width: 0.53em;
+}
+
+
+/**** Notes Display ****/
+.deployment-schedule.note {
+    padding-top: 4em;
+}

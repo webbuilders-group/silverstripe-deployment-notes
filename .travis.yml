@@ -1,0 +1,23 @@
+language: php
+php:
+ - 5.6
+
+sudo: false
+
+#notifications:
+#  email:
+#    secure: ...
+
+env:
+ - DB=MYSQL FRAMEWORK_TEST=1 CORE_RELEASE=3.6
+ - DB=PGSQL FRAMEWORK_TEST=1 CORE_RELEASE=3.6
+ - DB=SQLITE3 CORE_RELEASE=3.6
+
+before_script:
+ - phpenv rehash
+ - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
+ - "if [ \"$FRAMEWORK_TEST\" = \"1\" ]; then php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss; fi"
+ - cd ~/builds/ss
+
+script:
+ - phpunit silverstripe-deployment-notes/tests/

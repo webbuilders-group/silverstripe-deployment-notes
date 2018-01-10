@@ -1,0 +1,9 @@
+---
+Name: mysite_routes
+After:
+    - "framework/*"
+    - "cms/*"
+---
+Director:
+    rules:
+        "deployment-schedule//$Action/$ID/$OtherID": "DeploymentSchedule"
