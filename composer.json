@@ -1,6 +1,6 @@
 {
     "name": "webbuilders-group/silverstripe-deployment-notes",
-    "description": "@TODO",
+    "description": "A Deployment/Change Log Schedule and Notes system for SilverStripe sites",
     "type": "silverstripe-module",
     "keywords": ["silverstripe", "deployment", "schedule", "changelog"],
     "license": "BSD-3-Clause",
@@ -16,6 +16,7 @@
         "silverstripe/framework": "~3.2",
         "erusev/parsedown": "~1.0",
         "erusev/parsedown-extra": "~0.2",
+        "unclecheese/display-logic": "~1.4",
         "composer/installers": "*"
     },
     "support": {
