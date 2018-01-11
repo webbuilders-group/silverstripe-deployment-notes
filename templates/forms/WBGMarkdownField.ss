@@ -4,7 +4,7 @@
         
         <% if $ImageUploadEnabled %>
             <div class="wbg-markdown-message">
-                Add images by dragging and dropping them over the field.
+                <%t MarkdownField.ADD_IMAGES_BY "_Add images by dragging and dropping them over the field." %>
             </div>
             
             <div class="wbg-markdown-loader">
@@ -13,5 +13,5 @@
         <% end_if %>
     </div>
     
-    <div class="wbg-markdown-preview" data-previewtext="Loading Preview..." data-callbackurl="$Link('markdown-preview')">Loading Preview...</div>
+    <div class="wbg-markdown-preview" data-previewtext="<%t MarkdownField.LOADING_PREVIEW '_Loading Preview...' %>" data-callbackurl="$Link('markdown-preview')"><%t MarkdownField.LOADING_PREVIEW "_Loading Preview..." %></div>
 </div>

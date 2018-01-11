@@ -61,3 +61,10 @@ en:
         KNOWN_ISSUES: "Known Issues"
         KEY_TESTING: "Key Testing Areas"
         POST_STAGING: "Post Staging Changes"
+    MarkdownField:
+        NO_IMAGE: "No image was uploaded"
+        ADD_IMAGES_BY: "Add images by dragging and dropping them over the field."
+        LOADING_PREVIEW: "Loading Preview..."
+        WRITE: "Write"
+        PREVIEW: "Preview"
+        USES_MARKDOWN: 'This field uses <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">markdown</a> for formatting.'
