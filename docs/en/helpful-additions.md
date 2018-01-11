@@ -159,7 +159,7 @@ class DeploymentScheduleTemplateGlobals implements TemplateGlobalProvider {
      * @return bool True if the user can view the deployment schedule or not
      */
     public static function getCanViewDeployments() {
-        return (DeploymentSchedule::config()->view_permission_code===false || Permission::check(DeploymentSchedule::config()->view_permission_code, 'any', $member))
+        return (DeploymentSchedule::config()->view_permission_code===false || Permission::check(DeploymentSchedule::config()->view_permission_code));
     }
 
     /** ... **/
