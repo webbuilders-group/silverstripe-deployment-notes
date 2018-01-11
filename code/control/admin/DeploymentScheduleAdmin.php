@@ -5,7 +5,6 @@
  */
 class DeploymentScheduleAdmin extends ModelAdmin {
     private static $menu_icon='deployment-notes/images/menu-icons/deployment-schedule-admin.png';
-    private static $menu_title='Deployment Schedule';
     private static $url_segment='deployment-schedule';
     private static $managed_models=array(
                                         'DeploymentNote'
@@ -146,7 +145,7 @@ class DeploymentNavigatorItem_LiveLink extends SilverStripeNavigatorItem {
      * @return string
      */
     public function getTitle() {
-        return 'Preview';
+        return _t('DeploymentScheduleAdmin.PREVIEW', '_Preview');
     }
     
     /**
@@ -155,7 +154,7 @@ class DeploymentNavigatorItem_LiveLink extends SilverStripeNavigatorItem {
      */
     public function getHTML() {
         $this->recordLink = Controller::join_links($this->record->AbsoluteLink());
-        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">Preview</a>';
+        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('DeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
     }
     
     /**

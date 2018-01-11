@@ -41,12 +41,12 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
     private static $default_sort='DeploymentWeekEnd DESC';
     
     private static $summary_fields=array(
-                                        'Visible.Nice'=>'Visible to Users',
-                                        'DeploymentStart'=>'Cycle Start Date',
-                                        'DeploymentWeekEnd'=>'Deployment Week',
-                                        'Date'=>'Actual Deployment Date',
-                                        'StatusNice'=>'Deployment Status',
-                                        'OutOfCycle.Nice'=>'Out of Cycle'
+                                        'Visible.Nice'=>'_Visible to Users',
+                                        'DeploymentStart'=>'_Cycle Start Date',
+                                        'DeploymentWeekEnd'=>'_Deployment Week',
+                                        'Date'=>'_Actual Deployment Date',
+                                        'StatusNice'=>'_Deployment Status',
+                                        'OutOfCycle.Nice'=>'_Out of Cycle'
                                     );
     
     
@@ -166,34 +166,34 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         }
         
         $fields=new FieldList(
-                            new CheckboxField('Visible', 'Visible to Users?'),
-                            DateField::create('DeploymentStart', 'Cycle Start Date', $startDate)->setConfig('showcalendar', true),
-                            DateField::create('DeploymentWeekEnd', 'Deployment Week End Date', $endDate)->setConfig('showcalendar', true),
-                            DateField::create('Date', 'Actual Deployment Date')->setConfig('showcalendar', true),
-                            new MarkdownField('DeploymentNotes', 'Deployment Notes', "### Planned Changes:\n\n".
-                                                                                    "_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment._\n\n".
-                                                                                    "* TBA\n\n\n".
-                                                                                    "### High Level:\n\n".
-                                                                                    "* TBA\n\n\n".
-                                                                                    "### Bug Fixes/Behind the Scenes/Minor:\n\n".
-                                                                                    "* TBA\n\n\n".
-                                                                                    "### Known Issues:\n\n".
-                                                                                    "* None\n\n\n".
-                                                                                    "### Key Testing Areas:\n\n".
-                                                                                    "* TBA\n\n\n".
-                                                                                    "### Post Staging Changes:\n\n".
-                                                                                    "* TBA\n"),
+                            new CheckboxField('Visible', _t('DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
+                            DateField::create('DeploymentStart', _t('DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate)->setConfig('showcalendar', true),
+                            DateField::create('DeploymentWeekEnd', _t('DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate)->setConfig('showcalendar', true),
+                            DateField::create('Date', _t('DeploymentNote.db_Date', '_Actual Deployment Date'))->setConfig('showcalendar', true),
+                            new MarkdownField('DeploymentNotes', _t('DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
+                                                                                    '_'._t('DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
+                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('DeploymentNote.HIGH_LEVEL', '_High Level').":\n\n".
+                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('DeploymentNote.BUGS_BEHIND_MINOR', '_Bug Fixes/Behind the Scenes/Minor').":\n\n".
+                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('DeploymentNote.KNOWN_ISSUES', '_Known Issues').":\n\n".
+                                                                                    '* '._t('DeploymentNote.NONE', '_None')."\n\n\n".
+                                                                                    '### '._t('DeploymentNote.KEY_TESTING', '_Key Testing Areas').":\n\n".
+                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('DeploymentNote.POST_STAGING', '_Post Staging Changes').":\n\n".
+                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n"),
                             new OptionsetField('Status', 'Deployment Status', array(
-                                                                                    'planning'=>'Planning',
-                                                                                    'dev'=>'In Development',
-                                                                                    'staged'=>'On Staging/In Testing',
-                                                                                    'deployed'=>'Deployed to Production'
+                                                                                    'planning'=>_t('DeploymentNote.PLANNING', '_Planning'),
+                                                                                    'dev'=>_t('DeploymentNote.IN_DEV', '_In Development'),
+                                                                                    'staged'=>_t('DeploymentNote.STAGING_TESTING', '_On Staging/In Testing'),
+                                                                                    'deployed'=>_t('DeploymentNote.DEPLOYED', '_Deployed to Production')
                                                                                 ), 'planning'),
-                            new CheckboxField('DowntimeRequired', 'Is Downtime Required?'),
-                            NumericField::create('DowntimeEstimate', 'Estimated downtime length in minutes')->displayIf('DowntimeRequired')->isChecked()->end(),
-                            TextField::create('DowntimeReason', 'Reason for Downtime', null, 400)->displayIf('DowntimeRequired')->isChecked()->end(),
-                            new CheckboxField('OutOfCycle', 'Out of Cycle Deployment?'),
-                            new CheckboxField('CycleResetter', 'Resets the Deployment Cycle?')
+                            new CheckboxField('DowntimeRequired', _t('DeploymentNote.DOWNTIME_REQUIRED', '_Is Downtime Required?')),
+                            NumericField::create('DowntimeEstimate', _t('DeploymentNote.DOWNTIME_EST_LENGTH', '_Estimated downtime length in minutes'))->displayIf('DowntimeRequired')->isChecked()->end(),
+                            TextField::create('DowntimeReason', _t('DeploymentNote.DOWNTIME_REASON', '_Reason for Downtime'), null, 400)->displayIf('DowntimeRequired')->isChecked()->end(),
+                            new CheckboxField('OutOfCycle', _t('DeploymentNote.OUT_OF_CYCLE', '_Out of Cycle Deployment?')),
+                            new CheckboxField('CycleResetter', _t('DeploymentNote.RESETS_CYCLE', '_Resets the Deployment Cycle?'))
                         );
         
         
@@ -205,7 +205,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      * @return string
      */
     public function getTitle() {
-        return 'Week of '.$this->dbObject('DeploymentWeekEnd')->FormatFromSettings().' Deployment';
+        return _t('DeploymentNote.WEEK_OF_DEPLOYMENT', '_Week of {week_end_date} Deployment', array('week_end_date'=>$this->dbObject('DeploymentWeekEnd')->FormatFromSettings()));
     }
     
     /**
@@ -227,10 +227,10 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      */
     public function getStatusNice() {
         switch($this->Status) {
-            case 'planning':return 'Planning';
-            case 'dev':return 'In Development';
-            case 'staged':return 'On Staging/In Testing';
-            case 'deployed':return 'Deployed to Production';
+            case 'planning':return _t('DeploymentNote.PLANNING', '_Planning');
+            case 'dev':return _t('DeploymentNote.IN_DEV', '_In Development');
+            case 'staged':return _t('DeploymentNote.STAGING_TESTING', '_On Staging/In Testing');
+            case 'deployed':return _t('DeploymentNote.DEPLOYED', '_Deployed to Production');
         }
     }
     
@@ -278,6 +278,20 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      */
     public function CMSEditLink() {
         return Director::absoluteURL('admin/deployment-schedule/DeploymentNote/EditForm/field/DeploymentNote/item/'.$this->ID.'/edit');
+    }
+    
+    /**
+     * Get the default summary fields for this object.
+     * @return array
+     */
+    public function summaryFields() {
+        $fields=$this->stat('summary_fields');
+        
+        foreach($fields as $key=>$value) {
+            $fields[$key]=_t('DeploymentNote.db_'.str_replace('.', '_', $key), $value);
+        }
+        
+        return $fields;
     }
 }
 ?>
