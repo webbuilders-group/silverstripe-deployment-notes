@@ -56,7 +56,11 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      * @return bool Returns boolean true if the member can view this deployment note
      */
     public function canView($member=null) {
-        return ($this->Visible || Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true);
+        return (
+                ($this->Visible && (DeploymentScheduleAdmin::config()->view_permission_code===false || Permission::check(DeploymentScheduleAdmin::config()->view_permission_code, 'any', $member)))
+                ||
+                Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true
+            );
     }
     
     /**

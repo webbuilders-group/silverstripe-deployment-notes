@@ -44,6 +44,13 @@ class DeploymentSchedule extends Controller {
      */
     private static $deployment_history_page_length=12;
     
+    /**
+     * The permission code to check for to allow access to the deployment schedule
+     * @var string|array|bool
+     * @config DeploymentSchedule.view_permission_code
+     */
+    private static $view_permission_code='VIEW_DRAFT_CONTENT';
+    
     
     protected $upcomingDeployments=false;
     protected $currentDeployment=false;
@@ -69,7 +76,7 @@ class DeploymentSchedule extends Controller {
      * @return bool
      */
     public function canView($member=null) {
-        return Permission::check('VIEW_DRAFT_CONTENT', 'any', $member);
+        return ($this->config()->view_permission_code===false || Permission::check($this->config()->view_permission_code, 'any', $member));
     }
     
     /**
