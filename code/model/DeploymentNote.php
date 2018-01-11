@@ -51,6 +51,99 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
     
     
     /**
+     * Checks to see if the member can view this deployment note or not
+     * @param int|Member $member Member ID or instance to check
+     * @return bool Returns boolean true if the member can view this deployment note
+     */
+    public function canView($member=null) {
+        return ($this->Visible || Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true);
+    }
+    
+    /**
+     * Checks to see if the member can create a deployment note or not
+     * @param int|Member $member Member ID or instance to check
+     * @return bool Returns boolean true if the member can create a deployment note
+     */
+    public function canCreate($member=null) {
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Get the old value for Permission.admin_implies_all
+            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            
+            
+            //Disable the Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', false);
+        }
+        
+        
+        $result=(Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true);
+        
+        
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Restore the value for Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+        }
+        
+        
+        return $result;
+    }
+    
+    /**
+     * Checks to see if the member can edit this deployment note or not
+     * @param int|Member $member Member ID or instance to check
+     * @return bool Returns boolean true if the member can edit this deployment note
+     */
+    public function canEdit($member=null) {
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Get the old value for Permission.admin_implies_all
+            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            
+            
+            //Disable the Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', false);
+        }
+        
+        
+        $result=(Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true);
+        
+        
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Restore the value for Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+        }
+        
+        
+        return $result;
+    }
+    
+    /**
+     * Checks to see if the member can delete this deployment note or not
+     * @param int|Member $member Member ID or instance to check
+     * @return bool Returns boolean true if the member can delete this deployment note
+     */
+    public function canDelete($member=null) {
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Get the old value for Permission.admin_implies_all
+            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            
+            
+            //Disable the Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', false);
+        }
+        
+        
+        $result=(Permission::check('CMS_ACCESS_DeploymentScheduleAdmin', 'any', $member)==true);
+        
+        
+        if(DeploymentScheduleAdmin::config()->strict_permission_check) {
+            //Restore the value for Permission.admin_implies_all
+            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+        }
+        
+        
+        return $result;
+    }
+    
+    /**
      * Gets fields used in the cms
      * @return FieldList Fields to be used
      */
