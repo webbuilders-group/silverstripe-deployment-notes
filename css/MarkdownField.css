@@ -61,6 +61,8 @@
 .field.wbg-markdown textarea {
     background: #FFFFFF;
     
+    font-family: Consolas, monospace;
+    
     width: 100% !important;
     max-width: none;
     
