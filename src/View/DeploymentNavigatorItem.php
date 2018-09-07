@@ -20,7 +20,7 @@ class DeploymentNavigatorItem extends SilverStripeNavigatorItem {
      * @return string
      */
     public function getTitle() {
-        return _t('DeploymentScheduleAdmin.PREVIEW', '_Preview');
+        return _t('WebbuildersGroup\\DeploymentNotes\\Control\\AdminDeploymentScheduleAdmin.PREVIEW', '_Preview');
     }
     
     /**
@@ -29,7 +29,7 @@ class DeploymentNavigatorItem extends SilverStripeNavigatorItem {
      */
     public function getHTML() {
         $this->recordLink = Controller::join_links($this->record->AbsoluteLink());
-        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('DeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
+        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('WebbuildersGroup\\DeploymentNotes\\Control\\AdminDeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
     }
     
     /**

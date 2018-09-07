@@ -1,8 +1,8 @@
 en:
-    DeploymentScheduleAdmin:
+    WebbuildersGroup\DeploymentNotes\Control\Admin\DeploymentScheduleAdmin:
         MENUTITLE: "Deployment Schedule"
         PREVIEW: "Preview"
-    DeploymentSchedule:
+    WebbuildersGroup\DeploymentNotes\Control\DeploymentSchedule:
         CURRENT_DEPLOY_STATUS: "Current Deployment Status"
         CURRENT_DEPLOY_GO_LIVE: "Current deployment is scheduled to go live the week of {week_end_date}"
         NOTES_AVAILABLE: 'Deployment Notes are <a href="{link}">available here</a>.'
@@ -30,7 +30,7 @@ en:
         DOWNTIME_REQUIRED_EST: "Downtime is required for this deployment, we anticipate it lasting no longer than {time} minutes"
         DOWNTIME_REQUIRED_NO_EST: "Downtime is required for this deployment"
         BACK: "Back"
-    DeploymentNote:
+    WebbuildersGroup\DeploymentNotes\Model\DeploymentNote:
         SINGULARNAME: "Deployment Note"
         PLURALNAME: "Deployment Notes"
         db_Visible_Nice: "Visible to Users"
@@ -61,7 +61,7 @@ en:
         KNOWN_ISSUES: "Known Issues"
         KEY_TESTING: "Key Testing Areas"
         POST_STAGING: "Post Staging Changes"
-    MarkdownField:
+    WebbuildersGroup\DeploymentNotes\Forms\MarkdownField:
         NO_IMAGE: "No image was uploaded"
         ADD_IMAGES_BY: "Add images by dragging and dropping them over the field."
         LOADING_PREVIEW: "Loading Preview..."

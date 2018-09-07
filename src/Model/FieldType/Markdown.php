@@ -1,22 +1,24 @@
 <?php
 namespace WebbuildersGroup\DeploymentNotes\Model\FieldType;
 
-use SS_Cache;
 use ParsedownExtra;
 use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
+use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Flushable;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\FieldType\DBText;
 
 
 
-class Markdown extends DBText {
+class Markdown extends DBText implements Flushable {
     private static $casting=array(
                                 'AsHTML'=>'HTMLText',
                                 'Markdown'=>'Text'
                             );
     
     
-    public static $escape_type='xml';
+    private static $escape_type='xml';
     
     protected $parsedHTML=false;
     
@@ -33,12 +35,11 @@ class Markdown extends DBText {
         
         //Init cache stuff
         $cacheKey=md5('Markdown_'.$this->tableName.'_'.$this->name.'_'.($interactive ? 'readonly':'interactive').':'.$this->value);
-        $cache=\SS_Cache::factory(Markdown::class);
-        $cachedHTML=$cache->load($cacheKey);
+        $cache=Injector::inst()->get(CacheInterface::class . '.deployment-notes-markdown');
         
         //Check cache, if it's good use it instead
-        if($cachedHTML!==false) {
-            $this->parsedHTML=$cachedHTML;
+        if($cache->has($cacheKey)) {
+            $this->parsedHTML=$cache->get($cacheKey);
             return $this->parsedHTML;
         }
         
@@ -56,7 +57,7 @@ class Markdown extends DBText {
         $this->parsedHTML=$parser->text(Convert::raw2xml($this->value));
         
         //Cache response to file system
-        $cache->save($this->parsedHTML, $cacheKey);
+        $cache->set($cacheKey, $this->parsedHTML);
         
         //Return response
         return $this->parsedHTML;
@@ -76,6 +77,13 @@ class Markdown extends DBText {
      */
     public function forTemplate() {
         return $this->AsHTML();
+    }
+    
+    /**
+     * Flushes the caches of markdown
+     */
+    public static function flush() {
+        Injector::inst()->get(CacheInterface::class . '.deployment-notes-markdown')->clear();
     }
 }
 ?>

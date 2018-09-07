@@ -67,6 +67,8 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
                                         'OutOfCycle.Nice'=>'_Out of Cycle'
                                     );
     
+    private static $table_name='DeploymentNote';
+    
     
     /**
      * Checks to see if the member can view this deployment note or not
@@ -86,7 +88,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      * @param int|Member $member Member ID or instance to check
      * @return bool Returns boolean true if the member can create a deployment note
      */
-    public function canCreate($member=null) {
+    public function canCreate($member=null, $context=array()) {
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Get the old value for Permission.admin_implies_all
             $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
@@ -184,34 +186,34 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         }
         
         $fields=new FieldList(
-                            new CheckboxField('Visible', _t('DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
-                            DateField::create('DeploymentStart', _t('DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate)->setConfig('showcalendar', true),
-                            DateField::create('DeploymentWeekEnd', _t('DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate)->setConfig('showcalendar', true),
-                            DateField::create(DBDate::class, _t('DeploymentNote.db_Date', '_Actual Deployment Date'))->setConfig('showcalendar', true),
-                            new MarkdownField('DeploymentNotes', _t('DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
-                                                                                    '_'._t('DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
-                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
-                                                                                    '### '._t('DeploymentNote.HIGH_LEVEL', '_High Level').":\n\n".
-                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
-                                                                                    '### '._t('DeploymentNote.BUGS_BEHIND_MINOR', '_Bug Fixes/Behind the Scenes/Minor').":\n\n".
-                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
-                                                                                    '### '._t('DeploymentNote.KNOWN_ISSUES', '_Known Issues').":\n\n".
-                                                                                    '* '._t('DeploymentNote.NONE', '_None')."\n\n\n".
-                                                                                    '### '._t('DeploymentNote.KEY_TESTING', '_Key Testing Areas').":\n\n".
-                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".
-                                                                                    '### '._t('DeploymentNote.POST_STAGING', '_Post Staging Changes').":\n\n".
-                                                                                    '* '._t('DeploymentNote.TBA', '_TBA')."\n"),
+                            new CheckboxField('Visible', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
+                            DateField::create('DeploymentStart', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate)->setConfig('showcalendar', true),
+                            DateField::create('DeploymentWeekEnd', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate)->setConfig('showcalendar', true),
+                            DateField::create(DBDate::class, _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Date', '_Actual Deployment Date'))->setConfig('showcalendar', true),
+                            new MarkdownField('DeploymentNotes', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
+                                                                                    '_'._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.HIGH_LEVEL', '_High Level').":\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.BUGS_BEHIND_MINOR', '_Bug Fixes/Behind the Scenes/Minor').":\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.KNOWN_ISSUES', '_Known Issues').":\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.NONE', '_None')."\n\n\n".
+                                                                                    '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.KEY_TESTING', '_Key Testing Areas').":\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".
+                                                                                    '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.POST_STAGING', '_Post Staging Changes').":\n\n".
+                                                                                    '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n"),
                             new OptionsetField('Status', 'Deployment Status', array(
-                                                                                    'planning'=>_t('DeploymentNote.PLANNING', '_Planning'),
-                                                                                    'dev'=>_t('DeploymentNote.IN_DEV', '_In Development'),
-                                                                                    'staged'=>_t('DeploymentNote.STAGING_TESTING', '_On Staging/In Testing'),
-                                                                                    'deployed'=>_t('DeploymentNote.DEPLOYED', '_Deployed to Production')
+                                                                                    'planning'=>_t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNING', '_Planning'),
+                                                                                    'dev'=>_t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.IN_DEV', '_In Development'),
+                                                                                    'staged'=>_t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.STAGING_TESTING', '_On Staging/In Testing'),
+                                                                                    'deployed'=>_t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DEPLOYED', '_Deployed to Production')
                                                                                 ), 'planning'),
-                            new CheckboxField('DowntimeRequired', _t('DeploymentNote.DOWNTIME_REQUIRED', '_Is Downtime Required?')),
-                            NumericField::create('DowntimeEstimate', _t('DeploymentNote.DOWNTIME_EST_LENGTH', '_Estimated downtime length in minutes'))->displayIf('DowntimeRequired')->isChecked()->end(),
-                            TextField::create('DowntimeReason', _t('DeploymentNote.DOWNTIME_REASON', '_Reason for Downtime'), null, 400)->displayIf('DowntimeRequired')->isChecked()->end(),
-                            new CheckboxField('OutOfCycle', _t('DeploymentNote.OUT_OF_CYCLE', '_Out of Cycle Deployment?')),
-                            new CheckboxField('CycleResetter', _t('DeploymentNote.RESETS_CYCLE', '_Resets the Deployment Cycle?'))
+                            new CheckboxField('DowntimeRequired', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DOWNTIME_REQUIRED', '_Is Downtime Required?')),
+                            NumericField::create('DowntimeEstimate', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DOWNTIME_EST_LENGTH', '_Estimated downtime length in minutes'))->displayIf('DowntimeRequired')->isChecked()->end(),
+                            TextField::create('DowntimeReason', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DOWNTIME_REASON', '_Reason for Downtime'), null, 400)->displayIf('DowntimeRequired')->isChecked()->end(),
+                            new CheckboxField('OutOfCycle', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.OUT_OF_CYCLE', '_Out of Cycle Deployment?')),
+                            new CheckboxField('CycleResetter', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.RESETS_CYCLE', '_Resets the Deployment Cycle?'))
                         );
         
         
@@ -223,7 +225,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      * @return string
      */
     public function getTitle() {
-        return _t('DeploymentNote.WEEK_OF_DEPLOYMENT', '_Week of {week_end_date} Deployment', array('week_end_date'=>$this->dbObject('DeploymentWeekEnd')->FormatFromSettings()));
+        return _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.WEEK_OF_DEPLOYMENT', '_Week of {week_end_date} Deployment', array('week_end_date'=>$this->dbObject('DeploymentWeekEnd')->FormatFromSettings()));
     }
     
     /**
@@ -245,10 +247,10 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      */
     public function getStatusNice() {
         switch($this->Status) {
-            case 'planning':return _t('DeploymentNote.PLANNING', '_Planning');
-            case 'dev':return _t('DeploymentNote.IN_DEV', '_In Development');
-            case 'staged':return _t('DeploymentNote.STAGING_TESTING', '_On Staging/In Testing');
-            case 'deployed':return _t('DeploymentNote.DEPLOYED', '_Deployed to Production');
+            case 'planning':return _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNING', '_Planning');
+            case 'dev':return _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.IN_DEV', '_In Development');
+            case 'staged':return _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.STAGING_TESTING', '_On Staging/In Testing');
+            case 'deployed':return _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DEPLOYED', '_Deployed to Production');
         }
     }
     
@@ -282,7 +284,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
      * Link to view the canonical segment
      * @return string Link to view the canonical segment
      */
-    public function PreviewLink() {
+    public function PreviewLink($action=null) {
         if($this->hasMethod('alternatePreviewLink')) {
             return $this->alternatePreviewLink();
         }else {
@@ -306,10 +308,18 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         $fields=$this->stat('summary_fields');
         
         foreach($fields as $key=>$value) {
-            $fields[$key]=_t('DeploymentNote.db_'.str_replace('.', '_', $key), $value);
+            $fields[$key]=_t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_'.str_replace('.', '_', $key), $value);
         }
         
         return $fields;
+    }
+    
+    /**
+     * To determine preview mechanism (e.g. embedded / iframe)
+     * @return string
+     */
+    public function getMimeType() {
+        return 'text/html';
     }
 }
 ?>

@@ -24,7 +24,6 @@ class MarkdownField extends TextareaField {
     private $_maxUploadSize=0;
     
     protected $rows=30;
-    protected $template='WBGMarkdownField';
     
     
     public function FieldHolder($properties=array()) {
@@ -35,9 +34,7 @@ class MarkdownField extends TextareaField {
         
         Requirements::javascript('deployment-notes/javascript/MarkdownField.js');
         
-        $obj=($properties ? $this->customise($properties):$this);
-        
-        return $obj->renderWith('WBGMarkdownField_holder');
+        return parent::FieldHolder($properties);
     }
     
     /**

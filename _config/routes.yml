@@ -1,8 +1,7 @@
 ---
-Name: mysite_routes
+Name: deployment_schedule_routes
 After:
     - "framework/*"
-    - "cms/*"
 ---
 Director:
     rules:

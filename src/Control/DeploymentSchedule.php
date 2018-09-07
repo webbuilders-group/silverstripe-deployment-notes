@@ -151,7 +151,7 @@ class DeploymentSchedule extends Controller {
      */
     public function getTitle() {
         switch($this->action) {
-            case 'note':return _t('DeploymentSchedule.WEEK_OF_DEPLOYMENT', '_Week of {week_end_date} Deployment', array('week_end_date'=>$this->getCurrentDeployment()->dbObject('DeploymentWeekEnd')->FormatFromSettings()));
+            case 'note':return _t('WebbuildersGroup\\DeploymentNotes\\Control\\DeploymentSchedule.WEEK_OF_DEPLOYMENT', '_Week of {week_end_date} Deployment', array('week_end_date'=>$this->getCurrentDeployment()->dbObject('DeploymentWeekEnd')->FormatFromSettings()));
             default:return 'Deployment Schedule';
         }
     }

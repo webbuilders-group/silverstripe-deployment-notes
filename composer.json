@@ -13,16 +13,17 @@
     ],
     "require":
     {
-        "silverstripe/framework": "~3.2",
+        "silverstripe/framework": "~4.0",
         "erusev/parsedown": "~1.0",
         "erusev/parsedown-extra": "~0.2",
-        "unclecheese/display-logic": "*",
-        "composer/installers": "*"
+        "unclecheese/display-logic": "*"
     },
     "support": {
         "issues": "https://github.com/webbuilders-group/silverstripe-deployment-notes/issues"
     },
     "extra": {
-        "installer-name": "deployment-notes"
+		"branch-alias": {
+			"dev-master": "2.0.x-dev"
+        }
     }
 }
