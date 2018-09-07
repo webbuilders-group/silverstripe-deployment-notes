@@ -1,7 +1,15 @@
 <?php
-namespace WebbuildersGroup\DeploymentNotes\model\datatypes;
+namespace WebbuildersGroup\DeploymentNotes\Model\FieldType;
 
-class Markdown extends \Text {
+use SS_Cache;
+use ParsedownExtra;
+use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\FieldType\DBText;
+
+
+
+class Markdown extends DBText {
     private static $casting=array(
                                 'AsHTML'=>'HTMLText',
                                 'Markdown'=>'Text'
@@ -25,7 +33,7 @@ class Markdown extends \Text {
         
         //Init cache stuff
         $cacheKey=md5('Markdown_'.$this->tableName.'_'.$this->name.'_'.($interactive ? 'readonly':'interactive').':'.$this->value);
-        $cache=\SS_Cache::factory('Markdown');
+        $cache=\SS_Cache::factory(Markdown::class);
         $cachedHTML=$cache->load($cacheKey);
         
         //Check cache, if it's good use it instead
@@ -45,7 +53,7 @@ class Markdown extends \Text {
         $parser->setBreaksEnabled(true);
         
         //Store response in memory
-        $this->parsedHTML=$parser->text(\Convert::raw2xml($this->value));
+        $this->parsedHTML=$parser->text(Convert::raw2xml($this->value));
         
         //Cache response to file system
         $cache->save($this->parsedHTML, $cacheKey);

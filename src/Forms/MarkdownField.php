@@ -1,7 +1,18 @@
 <?php
-namespace WebbuildersGroup\DeploymentNotes\forms;
+namespace WebbuildersGroup\DeploymentNotes\Forms;
 
-class MarkdownField extends \TextareaField {
+use ParsedownExtra;
+use SilverStripe\View\Requirements;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\Director;
+use SilverStripe\Security\SecurityToken;
+use SilverStripe\Core\Convert;
+use SilverStripe\Assets\Upload;
+use SilverStripe\Assets\File;
+use SilverStripe\Forms\TextareaField;
+
+
+class MarkdownField extends TextareaField {
     private static $allowed_actions=array(
                                         'markdown_preview',
                                         'image_upload'
@@ -20,9 +31,9 @@ class MarkdownField extends \TextareaField {
         $this->extraClasses[]='stacked';
         $this->extraClasses[]='textarea';
         
-        \Requirements::css('deployment-notes/css/MarkdownField.css');
+        Requirements::css('deployment-notes/css/MarkdownField.css');
         
-        \Requirements::javascript('deployment-notes/javascript/MarkdownField.js');
+        Requirements::javascript('deployment-notes/javascript/MarkdownField.js');
         
         $obj=($properties ? $this->customise($properties):$this);
         
@@ -34,9 +45,9 @@ class MarkdownField extends \TextareaField {
      * @param {SS_HTTPRequest} $request HTTP Request Object
      * @return {string} HTML Response
      */
-    public function markdown_preview(\SS_HTTPRequest $request) {
+    public function markdown_preview(HTTPRequest $request) {
         //Verify the request is ajax and the security token is good
-        if(\Director::is_ajax()==false || \SecurityToken::inst()->checkRequest($request)==false) {
+        if(Director::is_ajax()==false || SecurityToken::inst()->checkRequest($request)==false) {
             return $this->httpError(403);
         }
         
@@ -52,7 +63,7 @@ class MarkdownField extends \TextareaField {
         $parser=new \ParsedownExtra();
         $parser->setBreaksEnabled(true);
         
-        return $parser->text(\Convert::raw2xml($markdown));
+        return $parser->text(Convert::raw2xml($markdown));
     }
     
     /**
@@ -60,7 +71,7 @@ class MarkdownField extends \TextareaField {
      * @param {SS_HTTPRequest} $request HTTP Request
      * @return {mixed} Response
      */
-    public function image_upload(SS_HTTPRequest $request) {
+    public function image_upload(HTTPRequest $request) {
         //If image support is not enabled block the request
         if($this->_imageSupportEnabled==false) {
             return $this->httpError(403);
@@ -73,7 +84,7 @@ class MarkdownField extends \TextareaField {
         
         
         //Initialize the upload handler
-        $upload=new \Upload();
+        $upload=new Upload();
         
         //Restrict to images
         $upload->getValidator()->setAllowedExtensions(array('jpg', 'gif', 'png'));
@@ -81,8 +92,8 @@ class MarkdownField extends \TextareaField {
         //Set the max file size
         if($this->_maxUploadSize<=0) {
             // get the lower max size
-            $maxUpload=\File::ini2bytes(ini_get('upload_max_filesize'));
-            $maxPost=\File::ini2bytes(ini_get('post_max_size'));
+            $maxUpload=File::ini2bytes(ini_get('upload_max_filesize'));
+            $maxPost=File::ini2bytes(ini_get('post_max_size'));
             $upload->getValidator()->setAllowedMaxFileSize(min($maxUpload, $maxPost));
         }else {
             $upload->getValidator()->setAllowedMaxFileSize($this->_maxUploadSize);

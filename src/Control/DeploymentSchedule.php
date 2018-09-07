@@ -1,4 +1,20 @@
 <?php
+namespace WebbuildersGroup\DeploymentNotes\Control;
+
+use DateTime;
+use SilverStripe\Security\Security;
+use SilverStripe\Security\Permission;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\View\Requirements;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\ORM\FieldType\DBDate;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\Core\Config\Config;
+
+
 /**
  * Class DeploymentSchedule
  *
@@ -237,7 +253,7 @@ class DeploymentSchedule extends Controller {
                         }
                     }else {
                         $schedule[]=new ArrayData(array(
-                                                        'DeploymentWeekEnd'=>DBField::create_field('Date', $weekEnd),
+                                                        'DeploymentWeekEnd'=>DBField::create_field(DBDate::class, $weekEnd),
                                                         'DeploymentNotes'=>false
                                                     ));
                     }
@@ -278,7 +294,7 @@ class DeploymentSchedule extends Controller {
                 $schedule[]=$note;
             }else {
                 $schedule[]=new ArrayData(array(
-                                                'DeploymentWeekEnd'=>DBField::create_field('Date', $weekEnd),
+                                                'DeploymentWeekEnd'=>DBField::create_field(DBDate::class, $weekEnd),
                                                 'DeploymentNotes'=>false
                                             ));
             }
@@ -368,11 +384,11 @@ class DeploymentSchedule extends Controller {
      */
     public function getIsAdmin() {
         //Get the old value for Permission.admin_implies_all
-        $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+        $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
         
         
         //Disable the Permission.admin_implies_all
-        Config::inst()->update('Permission', 'admin_implies_all', false);
+        Config::inst()->update(Permission::class, 'admin_implies_all', false);
         
         
         //Look to the normal permission checking
@@ -380,7 +396,7 @@ class DeploymentSchedule extends Controller {
         
         
         //Restore the value for Permission.admin_implies_all
-        Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+        Config::inst()->update(Permission::class, 'admin_implies_all', $oldValue);
         
         
         return ($result!==false);

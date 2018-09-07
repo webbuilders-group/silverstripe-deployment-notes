@@ -1,5 +1,23 @@
 <?php
-use WebbuildersGroup\DeploymentNotes\forms\MarkdownField;
+namespace WebbuildersGroup\DeploymentNotes\Model;
+
+use DateTime;
+use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
+use SilverStripe\Security\Permission;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DateField;
+use SilverStripe\ORM\FieldType\DBDate;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\CMSPreviewable;
+
 
 /**
  * Class DeploymentNote
@@ -21,7 +39,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
                             'DeploymentStart'=>'Date',
                             'DeploymentWeekEnd'=>'Date',
                             'Date'=>'Date',
-                            'DeploymentNotes'=>'WebbuildersGroup\DeploymentNotes\model\datatypes\Markdown',
+                            'DeploymentNotes'=>Markdown::class,
                             'Visible'=>'Boolean',
                             'OutOfCycle'=>'Boolean',
                             'CycleResetter'=>'Boolean',
@@ -71,11 +89,11 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
     public function canCreate($member=null) {
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Get the old value for Permission.admin_implies_all
-            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
             
             
             //Disable the Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', false);
+            Config::inst()->update(Permission::class, 'admin_implies_all', false);
         }
         
         
@@ -84,7 +102,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Restore the value for Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+            Config::inst()->update(Permission::class, 'admin_implies_all', $oldValue);
         }
         
         
@@ -99,11 +117,11 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
     public function canEdit($member=null) {
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Get the old value for Permission.admin_implies_all
-            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
             
             
             //Disable the Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', false);
+            Config::inst()->update(Permission::class, 'admin_implies_all', false);
         }
         
         
@@ -112,7 +130,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Restore the value for Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+            Config::inst()->update(Permission::class, 'admin_implies_all', $oldValue);
         }
         
         
@@ -127,11 +145,11 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
     public function canDelete($member=null) {
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Get the old value for Permission.admin_implies_all
-            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
             
             
             //Disable the Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', false);
+            Config::inst()->update(Permission::class, 'admin_implies_all', false);
         }
         
         
@@ -140,7 +158,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         
         if(DeploymentScheduleAdmin::config()->strict_permission_check) {
             //Restore the value for Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+            Config::inst()->update(Permission::class, 'admin_implies_all', $oldValue);
         }
         
         
@@ -169,7 +187,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
                             new CheckboxField('Visible', _t('DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
                             DateField::create('DeploymentStart', _t('DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate)->setConfig('showcalendar', true),
                             DateField::create('DeploymentWeekEnd', _t('DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate)->setConfig('showcalendar', true),
-                            DateField::create('Date', _t('DeploymentNote.db_Date', '_Actual Deployment Date'))->setConfig('showcalendar', true),
+                            DateField::create(DBDate::class, _t('DeploymentNote.db_Date', '_Actual Deployment Date'))->setConfig('showcalendar', true),
                             new MarkdownField('DeploymentNotes', _t('DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
                                                                                     '_'._t('DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
                                                                                     '* '._t('DeploymentNote.TBA', '_TBA')."\n\n\n".

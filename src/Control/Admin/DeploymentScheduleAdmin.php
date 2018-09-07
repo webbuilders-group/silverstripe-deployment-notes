@@ -1,4 +1,14 @@
 <?php
+namespace WebbuildersGroup\DeploymentNotes\Control\Admin;
+
+use WebbuildersGroup\DeploymentNotes\Forms\DeploymentGridFieldItemRequest;
+use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Security\Permission;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Admin\ModelAdmin;
+
+
 /**
  * Class DeploymentScheduleAdmin
  *
@@ -7,7 +17,7 @@ class DeploymentScheduleAdmin extends ModelAdmin {
     private static $menu_icon='deployment-notes/images/menu-icons/deployment-schedule-admin.png';
     private static $url_segment='deployment-schedule';
     private static $managed_models=array(
-                                        'DeploymentNote'
+                                        DeploymentNote::class
                                     );
     
     public $showImportForm=false;
@@ -29,11 +39,11 @@ class DeploymentScheduleAdmin extends ModelAdmin {
     public function canView($member=null) {
         if($this->config()->strict_permission_check) {
             //Get the old value for Permission.admin_implies_all
-            $oldValue=Config::inst()->get('Permission', 'admin_implies_all');
+            $oldValue=Config::inst()->get(Permission::class, 'admin_implies_all');
             
             
             //Disable the Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', false);
+            Config::inst()->update(Permission::class, 'admin_implies_all', false);
             
             
             //Look to the normal permission checking
@@ -41,7 +51,7 @@ class DeploymentScheduleAdmin extends ModelAdmin {
             
             
             //Restore the value for Permission.admin_implies_all
-            Config::inst()->update('Permission', 'admin_implies_all', $oldValue);
+            Config::inst()->update(Permission::class, 'admin_implies_all', $oldValue);
             
             
             return $result;
@@ -61,116 +71,13 @@ class DeploymentScheduleAdmin extends ModelAdmin {
         $form=parent::getEditForm();
         
         
-        $form->Fields()->dataFieldByName('DeploymentNote')
+        $form->Fields()->dataFieldByName(DeploymentNote::class)
                                                         ->getConfig()
-                                                            ->getComponentByType('GridFieldDetailForm')
-                                                                ->setItemRequestClass('DeploymentGridField_ItemRequest');
+                                                            ->getComponentByType(GridFieldDetailForm::class)
+                                                                ->setItemRequestClass(DeploymentGridFieldItemRequest::class);
         
         
         return $form;
-    }
-}
-
-class DeploymentGridField_ItemRequest extends GridFieldDetailForm_ItemRequest {
-    private static $allowed_actions=array(
-                                        'ItemEditForm'
-                                    );
-
-    /**
-     * Gets the form used for editing resources
-     * @return ResourceForm Resource form instance
-    */
-    public function ItemEditForm() {
-        $form=parent::ItemEditForm();
-
-        if(!($form instanceof Form)) {
-            return $form;
-        }
-
-        //Add the navigator if it doesn't exist
-        if(!$form->Fields()->fieldByName('SilverStripeNavigator') && $this->record->exists()) {
-            $navField=LiteralField::create('SilverStripeNavigator', $this->getSilverStripeNavigator())->setForm($form)->setAllowHTML(true);
-            $form->Fields()->push($navField);
-             
-            $form->addExtraClass('cms-previewable');
-            $form->setTemplate('PreviewItemEditForm');
-        }
-
-
-        return $form;
-    }
-
-    /**
-     * Used for preview controls, mainly links which switch between different states of the page.
-     * @return ArrayData
-     */
-    protected function getSilverStripeNavigator($segment=null) {
-        if($this->record) {
-            $navigator=new SilverStripeNavigator($this->record);
-            return $navigator->renderWith($this->getToplevelController()->getTemplatesWithSuffix('_SilverStripeNavigator'));
-        }else {
-            return false;
-        }
-    }
-     
-    /**
-     * Gets the preview link
-     * @return string Link to view the record
-     */
-    public function LinkPreview() {
-        return $this->record->Link();
-    }
-
-    /**
-     * Gets the absolute link to this item request
-     * @param string $action Action to be added to the url
-     * @return string
-     */
-    public function AbsoluteLink($action=null)  {
-        return Director::absoluteURL($this->Link($action));
-    }
-}
-
-class DeploymentNavigatorItem_LiveLink extends SilverStripeNavigatorItem {
-    /**
-     * Checks to see if the record is an instance of a deployment note or not
-     * @return bool
-     */
-    public function canView($member=null) {
-        return ($this->record instanceof DeploymentNote);
-    }
-    
-    /**
-     * Returns the title for this link
-     * @return string
-     */
-    public function getTitle() {
-        return _t('DeploymentScheduleAdmin.PREVIEW', '_Preview');
-    }
-    
-    /**
-     * Gets the html for rendering this link
-     * @return string
-     */
-    public function getHTML() {
-        $this->recordLink = Controller::join_links($this->record->AbsoluteLink());
-        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('DeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
-    }
-    
-    /**
-     * Gets the relative link to preview the record
-     * @return string
-     */
-    public function getLink() {
-        return Controller::join_links($this->record->PreviewLink());
-    }
-    
-    /**
-     * Determins whether or not this link is active or not
-     * @return bool
-     */
-    public function isActive() {
-        return true;
     }
 }
 ?>
