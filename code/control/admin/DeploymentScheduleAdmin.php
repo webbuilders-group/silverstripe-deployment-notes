@@ -93,7 +93,7 @@ class DeploymentGridField_ItemRequest extends GridFieldDetailForm_ItemRequest {
             $form->Fields()->push($navField);
              
             $form->addExtraClass('cms-previewable');
-            $form->setTemplate('PreviewItemEditForm');
+            $form->setTemplate('DeploymentNoteEditForm');
         }
 
 
