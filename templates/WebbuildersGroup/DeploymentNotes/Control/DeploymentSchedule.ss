@@ -10,7 +10,7 @@
         
         <% require css("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css") %>
         <% require css("https://fonts.googleapis.com/css?family=Raleway:400,700,700italic,400italic,500,500italic,300,300italic") %>
-        <% require css(deployment-notes/css/DeploymentSchedule.css) %>
+        <% require css("webbuilders-group/silverstripe-deployment-notes:css/DeploymentSchedule.css") %>
     </head>
     <body class="deployment-schedule $Action">
         $Layout

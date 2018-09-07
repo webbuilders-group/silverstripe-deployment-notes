@@ -14,7 +14,7 @@ use SilverStripe\Admin\ModelAdmin;
  *
  */
 class DeploymentScheduleAdmin extends ModelAdmin {
-    private static $menu_icon='deployment-notes/images/menu-icons/deployment-schedule-admin.png';
+    private static $menu_icon='webbuilders-group/silverstripe-deployment-notes:images/menu-icons/deployment-schedule-admin.png';
     private static $url_segment='deployment-schedule';
     private static $managed_models=array(
                                         DeploymentNote::class

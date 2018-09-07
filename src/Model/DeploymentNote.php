@@ -190,9 +190,9 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
         
         $fields=new FieldList(
                             new CheckboxField('Visible', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
-                            DateField::create('DeploymentStart', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate)/*->setConfig('showcalendar', true)*/,
-                            DateField::create('DeploymentWeekEnd', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate)/*->setConfig('showcalendar', true)*/,
-                            DateField::create(DBDate::class, _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Date', '_Actual Deployment Date'))/*->setConfig('showcalendar', true)*/,
+                            DateField::create('DeploymentStart', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate),
+                            DateField::create('DeploymentWeekEnd', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate),
+                            DateField::create(DBDate::class, _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Date', '_Actual Deployment Date')),
                             new MarkdownField('DeploymentNotes', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
                                                                                     '_'._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
                                                                                     '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".

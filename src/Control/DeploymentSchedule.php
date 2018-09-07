@@ -138,9 +138,9 @@ class DeploymentSchedule extends Controller {
         
         //Requirements
         Requirements::javascript('https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.js');
-        Requirements::javascript(THIRDPARTY_DIR.'/jquery/jquery.min.js');
-        Requirements::javascript(THIRDPARTY_DIR.'/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('deployment-notes/javascript/DeploymentSchedule.js');
+        Requirements::javascript('silverstripe/admin:thirdparty/jquery/jquery.min.js');
+        Requirements::javascript('silverstripe/admin:thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
+        Requirements::javascript('webbuilders-group/silverstripe-deployment-notes:javascript/DeploymentSchedule.js');
         
         
         return array();

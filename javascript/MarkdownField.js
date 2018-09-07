@@ -1,12 +1,12 @@
 (function($) {
     $.entwine('lenovo', function($) {
-        $('.field.wbg-markdown ul.panelsNav a').entwine({
+        $('.field.deployment-notes-markdown ul.panelsNav a').entwine({
             onclick: function(e) {
                 var self=$(this);
                 if(self.hasClass('selected')==false) {
                     var panelWrapper=self.closest('.field').find('.panels');
-                    var markdownEditor=panelWrapper.find('.wbg-markdown-editor');
-                    var markdown=panelWrapper.find('.wbg-markdown-preview');
+                    var markdownEditor=panelWrapper.find('.deployment-notes-markdown-editor');
+                    var markdown=panelWrapper.find('.deployment-notes-markdown-preview');
                     
                     
                     //Clear selection and select this tab
@@ -43,7 +43,7 @@
             }
         });
         
-        $('.field.wbg-markdown.image-support textarea').entwine({
+        $('.field.deployment-notes-markdown.image-support textarea').entwine({
             /**
              * Handles when the user's dragging enters the textarea
              * @param e Event Data
@@ -113,7 +113,7 @@
                     data.append('image', files[0]);
                     
                     //Display loading
-                    self.siblings('.wbg-markdown-loader').show();
+                    self.siblings('.deployment-notes-markdown-loader').show();
                     
                     $.ajax({
                         url: url,
@@ -134,16 +134,16 @@
                                 self.showMessage('Add images by dragging and dropping them over the field.');
                             }
                             
-                            self.siblings('.wbg-markdown-loader').hide();
+                            self.siblings('.deployment-notes-markdown-loader').hide();
                         },
                         error: function() {
                             self.showMessage('Error uploading the image', true);
                             
-                            self.siblings('.wbg-markdown-loader').hide();
+                            self.siblings('.deployment-notes-markdown-loader').hide();
                         },
                         xhr: function() {
                             var xhr=jQuery.ajaxSettings.xhr();
-                            var progressElem=self.siblings('.wbg-markdown-loader').find('.wbg-markdown-upload-progress i');
+                            var progressElem=self.siblings('.deployment-notes-markdown-loader').find('.deployment-notes-markdown-upload-progress i');
                             
                             if(window.addEventListener && progressElem.length==0) {
                                 progressElem.css('width', 0);
@@ -168,7 +168,7 @@
              * @param {bool} error Whether the message is an error or not
              */
             showMessage: function(message, error) {
-                var messageBox=$(this).siblings('.wbg-markdown-message');
+                var messageBox=$(this).siblings('.deployment-notes-markdown-message');
                 if(error==true) {
                     messageBox.addClass('error');
                 }

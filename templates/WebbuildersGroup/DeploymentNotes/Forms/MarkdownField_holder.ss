@@ -3,7 +3,7 @@
     
     <ul class="panelsNav">
         <li><a href="#" class="selected" data-panel="textarea"><%t WebbuildersGroup\\DeploymentNotes\\Forms\\MarkdownField.WRITE "_Write" %></a></li>
-        <li><a href="#" data-panel="wbg-markdown-preview"><%t WebbuildersGroup\\DeploymentNotes\\Forms\\MarkdownField.PREVIEW "_Preview" %></a></li>
+        <li><a href="#" data-panel="deployment-notes-markdown-preview"><%t WebbuildersGroup\\DeploymentNotes\\Forms\\MarkdownField.PREVIEW "_Preview" %></a></li>
     </ul>
     
 	<div class="middleColumn">

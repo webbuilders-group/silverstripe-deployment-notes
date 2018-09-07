@@ -130,7 +130,7 @@ class MarkdownField extends TextareaField {
     public function extraClass() {
         $classes=parent::extraClass();
         
-        $classes=str_replace(preg_replace('/field$/', '', strtolower($this->class)), 'wbg-markdown', $classes);
+        $classes.=' deployment-notes-markdown';
         
         if($this->_imageSupportEnabled) {
             $classes.=' image-support';
