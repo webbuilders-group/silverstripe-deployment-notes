@@ -2,25 +2,13 @@ Helpful Additions
 =================
 There are a couple of helpful additions that we've used on our projects that make using the deployment schedule a bit more friendly for the users.
 
-## SilverStripe Navigator Addon
-You can add a link to the deployment schedule into the SilverStripe Navigator built into SilverStripe 3.x by adding the following code into your ``Page_Controller`` class:
+## Better Navigator Addon
+If you are using the [jonom/silverstripe-betternavigator](https://github.com/jonom/silverstripe-betternavigator) module you can create the following as a template named ``BetterNavigatorExtraContent.ss`` in your theme or application/project folder to add a button linking to the deployment schedule.
 
-```php
-/**
- * Injects the deployment schedule link into the SilverStripe Navigator
- * @return string HTML used for the SilverStripe Navigator
- */
-public function SilverStripeNavigator() {
-    $html=parent::SilverStripeNavigator();
-
-    if(Permission::check('CMS_ACCESS_CMSMain') || Permission::check('VIEW_DRAFT_CONTENT')) {
-        $logoutLink='<a href="Security/logout">'._t('ContentController.LOGOUT', 'Log out').'</a>';
-
-        $html=str_replace($logoutLink, '<a href="deployment-schedule" target="_blank">Deployment Schedule</a>&nbsp;&nbsp;'.$logoutLink, $html);
-    }
-
-    return $html;
-}
+```silverstripe
+<div class="bn-links">
+    <a href="deployment-schedule"><span class="bn-icon-db"></span>Deployment Schedule</a>
+</div>
 ```
 
 
