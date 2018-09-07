@@ -1,12 +1,12 @@
 <?php
 namespace WebbuildersGroup\DeploymentNotes\Control\Admin;
 
-use WebbuildersGroup\DeploymentNotes\Forms\DeploymentGridFieldItemRequest;
-use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Security\Permission;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Admin\ModelAdmin;
+use WebbuildersGroup\DeploymentNotes\Forms\DeploymentGridFieldItemRequest;
+use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 
 
 /**

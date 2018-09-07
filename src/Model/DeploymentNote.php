@@ -2,10 +2,6 @@
 namespace WebbuildersGroup\DeploymentNotes\Model;
 
 use DateTime;
-use WebbuildersGroup\DeploymentNotes\Control\DeploymentSchedule;
-use WebbuildersGroup\DeploymentNotes\Control\Admin\DeploymentScheduleAdmin;
-use WebbuildersGroup\DeploymentNotes\Forms\MarkdownField;
-use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
 use SilverStripe\Security\Permission;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\CheckboxField;
@@ -20,6 +16,10 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\CMSPreviewable;
+use WebbuildersGroup\DeploymentNotes\Control\DeploymentSchedule;
+use WebbuildersGroup\DeploymentNotes\Control\Admin\DeploymentScheduleAdmin;
+use WebbuildersGroup\DeploymentNotes\Forms\MarkdownField;
+use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
 
 
 /**

@@ -1,3 +1,6 @@
 # Changelog
 
-## [0.1.0]
+## [2.0.0]
+* Support for SilverStripe 4
+
+## [1.0.0]

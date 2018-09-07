@@ -16,7 +16,7 @@ class DeploymentGridFieldItemRequest extends GridFieldDetailForm_ItemRequest {
     /**
      * Gets the form used for editing resources
      * @return ResourceForm Resource form instance
-    */
+     */
     public function ItemEditForm() {
         $form=parent::ItemEditForm();
 
@@ -25,12 +25,16 @@ class DeploymentGridFieldItemRequest extends GridFieldDetailForm_ItemRequest {
         }
 
         //Add the navigator if it doesn't exist
-        if(!$form->Fields()->fieldByName(SilverStripeNavigator::class) && $this->record->exists()) {
-            $navField=LiteralField::create(SilverStripeNavigator::class, $this->getSilverStripeNavigator())->setForm($form)->setAllowHTML(true);
+        if(!$form->Fields()->fieldByName('SilverStripeNavigator') && $this->record->exists() && class_exists(SilverStripeNavigator::class)) {
+            $navField = new LiteralField('SilverStripeNavigator', $this->getSilverStripeNavigator());
+            $navField->setAllowHTML(true);
             $form->Fields()->push($navField);
-             
+            
             $form->addExtraClass('cms-previewable');
-            $form->setTemplate('PreviewItemEditForm');
+            $form->setTemplate(array(
+                                    'type'=>'Includes',
+                                    'WebbuildersGroup\\DeploymentNotes\\DeploymentNoteEditForm'
+                                ));
         }
 
 
@@ -42,7 +46,7 @@ class DeploymentGridFieldItemRequest extends GridFieldDetailForm_ItemRequest {
      * @return ArrayData
      */
     protected function getSilverStripeNavigator($segment=null) {
-        if($this->record) {
+        if($this->record && class_exists(SilverStripeNavigator::class)) {
             $navigator=new SilverStripeNavigator($this->record);
             return $navigator->renderWith($this->getToplevelController()->getTemplatesWithSuffix('_SilverStripeNavigator'));
         }else {
@@ -65,6 +69,19 @@ class DeploymentGridFieldItemRequest extends GridFieldDetailForm_ItemRequest {
      */
     public function AbsoluteLink($action=null)  {
         return Director::absoluteURL($this->Link($action));
+    }
+    
+    /**
+     * Render $PreviewPanel content
+     * @return DBHTMLText
+     */
+    public function PreviewPanel() {
+        $template = $this->getTopLevelController()->getTemplatesWithSuffix('_PreviewPanel');
+        // Only render sections with preview panel
+        if ($template) {
+            return $this->renderWith($template);
+        }
+        return null;
     }
 }
 ?>

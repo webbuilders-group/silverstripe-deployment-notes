@@ -2,13 +2,11 @@
 namespace WebbuildersGroup\DeploymentNotes\Model\FieldType;
 
 use ParsedownExtra;
-use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
 use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\FieldType\DBText;
-
 
 
 class Markdown extends DBText implements Flushable {

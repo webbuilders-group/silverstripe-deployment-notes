@@ -6,7 +6,11 @@ use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Controllers\SilverStripeNavigatorItem;
 
 
-class DeploymentNavigatorItem extends SilverStripeNavigatorItem {
+if (!class_exists(SilverStripeNavigatorItem::class)) {
+    return;
+}
+
+class DeploymentNavigatorItem_LiveLink extends SilverStripeNavigatorItem {
     /**
      * Checks to see if the record is an instance of a deployment note or not
      * @return bool
@@ -20,7 +24,7 @@ class DeploymentNavigatorItem extends SilverStripeNavigatorItem {
      * @return string
      */
     public function getTitle() {
-        return _t('WebbuildersGroup\\DeploymentNotes\\Control\\AdminDeploymentScheduleAdmin.PREVIEW', '_Preview');
+        return _t('WebbuildersGroup\\DeploymentNotes\\Control\\Admin\\DeploymentScheduleAdmin.PREVIEW', '_Preview');
     }
     
     /**
@@ -29,7 +33,7 @@ class DeploymentNavigatorItem extends SilverStripeNavigatorItem {
      */
     public function getHTML() {
         $this->recordLink = Controller::join_links($this->record->AbsoluteLink());
-        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('WebbuildersGroup\\DeploymentNotes\\Control\\AdminDeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
+        return '<a '.($this->isActive() ? 'class="current" ':'').' href="'.$this->recordLink.'">'._t('WebbuildersGroup\\DeploymentNotes\\Control\\Admin\\DeploymentScheduleAdmin.PREVIEW', '_Preview').'</a>';
     }
     
     /**

@@ -2,7 +2,6 @@
 namespace WebbuildersGroup\DeploymentNotes\Control;
 
 use DateTime;
-use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 use SilverStripe\Security\Security;
 use SilverStripe\Security\Permission;
 use SilverStripe\Control\Controller;
@@ -14,6 +13,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\ArrayData;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Core\Config\Config;
+use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 
 
 /**
