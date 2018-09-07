@@ -2,6 +2,7 @@
 namespace WebbuildersGroup\DeploymentNotes\Control;
 
 use DateTime;
+use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 use SilverStripe\Security\Security;
 use SilverStripe\Security\Permission;
 use SilverStripe\Control\Controller;

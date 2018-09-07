@@ -30,9 +30,9 @@ class MarkdownField extends TextareaField {
         $this->extraClasses[]='stacked';
         $this->extraClasses[]='textarea';
         
-        Requirements::css('deployment-notes/css/MarkdownField.css');
+        Requirements::css('webbuilders-group/silverstripe-deployment-notes:css/MarkdownField.css');
         
-        Requirements::javascript('deployment-notes/javascript/MarkdownField.js');
+        Requirements::javascript('webbuilders-group/silverstripe-deployment-notes:javascript/MarkdownField.js');
         
         return parent::FieldHolder($properties);
     }

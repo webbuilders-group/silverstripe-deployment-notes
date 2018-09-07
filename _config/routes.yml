@@ -3,6 +3,6 @@ Name: deployment_schedule_routes
 After:
     - "framework/*"
 ---
-Director:
+SilverStripe\Control\Director:
     rules:
-        "deployment-schedule//$Action/$ID/$OtherID": "DeploymentSchedule"
+        "deployment-schedule//$Action/$ID/$OtherID": WebbuildersGroup\DeploymentNotes\Control\DeploymentSchedule

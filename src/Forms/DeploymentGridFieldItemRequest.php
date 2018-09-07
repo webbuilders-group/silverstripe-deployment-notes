@@ -1,5 +1,5 @@
 <?php
-namespace WebbuildersGroup\DeploymentNotes;
+namespace WebbuildersGroup\DeploymentNotes\Forms;
 
 use SilverStripe\Forms\Form;
 use SilverStripe\CMS\Controllers\SilverStripeNavigator;

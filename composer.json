@@ -1,7 +1,7 @@
 {
     "name": "webbuilders-group/silverstripe-deployment-notes",
     "description": "A Deployment/Change Log Schedule and Notes system for SilverStripe sites",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "keywords": ["silverstripe", "deployment", "schedule", "changelog"],
     "license": "BSD-3-Clause",
     "authors": [
@@ -16,12 +16,16 @@
         "silverstripe/framework": "~4.0",
         "erusev/parsedown": "~1.0",
         "erusev/parsedown-extra": "~0.2",
-        "unclecheese/display-logic": "*"
+        "unclecheese/display-logic": "~2.0"
     },
     "support": {
         "issues": "https://github.com/webbuilders-group/silverstripe-deployment-notes/issues"
     },
     "extra": {
+        "expose": [
+            "css",
+            "javascript"
+        ],
 		"branch-alias": {
 			"dev-master": "2.0.x-dev"
         }

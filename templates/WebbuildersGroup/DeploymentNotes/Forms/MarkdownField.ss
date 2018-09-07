@@ -1,6 +1,6 @@
 <div class="panels">
     <div class="wbg-markdown-editor">
-        <textarea $AttributesHTML>$Value</textarea>
+        <textarea $AttributesHTML>$ValueEntities.RAW</textarea>
         
         <% if $ImageUploadEnabled %>
             <div class="wbg-markdown-message">

@@ -1,0 +1,11 @@
+---
+Name: deployment_schedule
+After:
+    - "framework/*"
+---
+SilverStripe\Core\Injector\Injector:
+    Psr\SimpleCache\CacheInterface.deployment-notes-markdown:
+        factory: SilverStripe\Core\Cache\CacheFactory
+        constructor:
+            namespace: "deployment-notes-markdown"
+            defaultLifetime: 600

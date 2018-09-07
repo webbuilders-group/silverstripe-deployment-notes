@@ -71,7 +71,7 @@ class DeploymentScheduleAdmin extends ModelAdmin {
         $form=parent::getEditForm();
         
         
-        $form->Fields()->dataFieldByName(DeploymentNote::class)
+        $form->Fields()->dataFieldByName(str_replace('\\', '-', DeploymentNote::class))
                                                         ->getConfig()
                                                             ->getComponentByType(GridFieldDetailForm::class)
                                                                 ->setItemRequestClass(DeploymentGridFieldItemRequest::class);

@@ -1,5 +1,5 @@
 <?php
-namespace WebbuildersGroup\DeploymentNotes;
+namespace WebbuildersGroup\DeploymentNotes\View;
 
 use WebbuildersGroup\DeploymentNotes\Model\DeploymentNote;
 use SilverStripe\Control\Controller;
