@@ -1,25 +1,24 @@
 <?php
 namespace WebbuildersGroup\DeploymentNotes\Model;
 
-use DateTime;
-use SilverStripe\Security\Permission;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DateField;
-use SilverStripe\ORM\FieldType\DBDate;
-use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\NumericField;
-use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\RequiredFields;
-use SilverStripe\Control\Controller;
-use SilverStripe\Control\Director;
-use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
 use WebbuildersGroup\DeploymentNotes\Control\DeploymentSchedule;
 use WebbuildersGroup\DeploymentNotes\Control\Admin\DeploymentScheduleAdmin;
 use WebbuildersGroup\DeploymentNotes\Forms\MarkdownField;
 use WebbuildersGroup\DeploymentNotes\Model\FieldType\Markdown;
+use DateTime;
 
 
 /**
@@ -192,7 +191,7 @@ class DeploymentNote extends DataObject implements CMSPreviewable {
                             new CheckboxField('Visible', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Visible_Nice', '_Visible to Users?')),
                             DateField::create('DeploymentStart', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_DeploymentStart', '_Cycle Start Date'), $startDate),
                             DateField::create('DeploymentWeekEnd', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.WEEK_END', '_Deployment Week End Date'), $endDate),
-                            DateField::create(DBDate::class, _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Date', '_Actual Deployment Date')),
+                            DateField::create('Date', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.db_Date', '_Actual Deployment Date')),
                             new MarkdownField('DeploymentNotes', _t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.DEPLOYMENT_NOTES', '_Deployment Notes'), '### '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_TITLE', '_Planned Changes').":\n\n".
                                                                                     '_'._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.PLANNED_DESC', '_Planned Changes are scheduled to be included in this deployment however they maybe pushed to a future deployment.')."_\n\n".
                                                                                     '* '._t('WebbuildersGroup\\DeploymentNotes\\Model\\DeploymentNote.TBA', '_TBA')."\n\n\n".
