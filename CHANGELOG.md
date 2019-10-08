@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.2]
+[Full Changelog](https://github.com/webbuilders-group/silverstripe-deployment-notes/compare/2.0.1...2.0.2)
+
+
 ## [2.0.1]
 [Full Changelog](https://github.com/webbuilders-group/silverstripe-deployment-notes/compare/2.0.0...2.0.1)
 

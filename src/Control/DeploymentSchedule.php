@@ -224,7 +224,7 @@ class DeploymentSchedule extends Controller {
             
             for($i=0;$i<$loopEndIndex;$i++) {
                 $weekEnd=date('Y-m-d', strtotime($cycleStartDate.' +'.($this->config()->deployment_cycle_length*($i+1)).' weeks'));
-                $note=DeploymentNote::get()->filter('Visible', true)->filter('DeploymentWeekEnd', $weekEnd)->first();
+                $note=DeploymentNote::get()->filter('Visible', true)->filter('Status:not', 'deployed')->filter('DeploymentWeekEnd', $weekEnd)->first();
                 if(!empty($note) && $note!==false && $note->exists()) {
                     $schedule[]=$note;
                 }else {
